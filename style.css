@@ -1,0 +1,358 @@
+/* ==========================================================================
+  fridg3.org – Global Stylesheet
+  --------------------------------------------------------------------------
+  variables → base → layout → components → utilities → animations
+  ========================================================================= */
+
+/* ==========================================================================
+  0) Custom fonts
+  ========================================================================= */
+
+@font-face { font-family: "MainRegular";     src: url(/resources/nk57-cdrg.otf);            font-weight: normal; }
+@font-face { font-family: "MainBold";        src: url(/resources/nk57-cdrg-bold.otf);       font-weight: normal; }
+@font-face { font-family: "MainItalic";      src: url(/resources/nk57-cdrg-italic.otf);     font-weight: normal; }
+@font-face { font-family: "MainBoldItalic";  src: url(/resources/nk57-cdrg-bolditalic.otf); font-weight: normal; }
+@font-face { font-family: "MonospaceFont";   src: url(/resources/IBM_VGA.woff);             font-weight: normal; }
+
+/* ==========================================================================
+  1) Base
+  ========================================================================= */
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: "MainRegular", monospace;
+  /* background-color: #181818; */ /* dark default */
+  background-color: #121212; /* dark default */
+  color: #cfcfcf;            /* default text */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  transition: background-color 0.35s, color 0.35s;
+}
+
+/* accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* selection color */
+::selection { background-color: #5578a3; color: #ffffff; }
+
+/* ==========================================================================
+  2) Theme switcher button (top-right)
+  ========================================================================= */
+
+#change-theme {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #cfcfcf; /* dark default */
+  font-size: 0.9rem;
+  transition: background-color 0.35s, color 0.35s;
+}
+#change-theme:focus,
+#change-button:focus { outline: none; }
+
+/* ==========================================================================
+  3) Scrollbar (WebKit)
+  ========================================================================= */
+
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background-color: inherit; }
+::-webkit-scrollbar-thumb  { background-color: #5c5c5c; }
+::-webkit-scrollbar-thumb:hover { background-color: #838383; }
+
+/* ==========================================================================
+  4) Container shell
+  ========================================================================= */
+
+.container {
+  background-color: #1e1e1e; /* dark default */
+  color: #cfcfcf;
+  width: 80%;
+  max-width: 560px;
+  padding: 20px 20px 40px;
+  border-radius: 0;
+  margin: 40px auto;
+  overflow: auto;
+  z-index: 1;
+  transition: background-color 0.35s, color 0.35s;
+}
+
+/* ==========================================================================
+  5) Typography
+  ========================================================================= */
+
+i { font-family: "MainItalic", monospace; }
+b { font-family: "MainBold", monospace; }
+
+h1 a {
+  text-align: center;
+  margin-bottom: 15px;
+  text-decoration: none;
+  font-family: 'MainBoldItalic';
+  background-image: linear-gradient(
+   to right,
+   #5fb3b3 0%,  #5fb3b3 10%,
+   #ec5f67 10%, #ec5f67 20%,
+   #c594c5 20%, #c594c5 35%,
+   #6699cc 35%, #6699cc 50%,
+   #99c794 50%, #99c794 65%,
+   #fac863 65%, #fac863 80%,
+   #f99157 80%, #f99157 100%
+  );
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: inherit;
+  animation: movegradient 8s linear infinite;
+}
+h1 a:hover   { color: transparent; }
+h1 a:visited { color: inherit; }
+
+h3 { text-align: center; margin-bottom: 10px; font-family: 'MainBold', monospace; }
+h4 { text-align: center; font-size: small; color: #7a7a7a; margin: 5px 0 30px; }
+
+a { color: #5580ab; transition: color 0.35s; }
+a:visited { color: #5580ab; }
+a:hover   { color: #a97fa9; }
+
+img { max-width: 100%; height: auto; display: block; margin: auto; border-radius: 0; }
+li { margin: 16px 0 16px 16px; }
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #b5b5b51f;
+  margin: 20px 0;
+}
+
+/* ==========================================================================
+  6) Navigation / State labels
+  ========================================================================= */
+
+#current { cursor: not-allowed; color: #767676; }
+#posts { margin: 20px 0; }
+#postlink  { text-decoration: none; }
+#rss { text-align: center; }
+
+/* ==========================================================================
+  7) RSS badge
+  ========================================================================= */
+
+.rss {
+  background-color: #2b2b2b; color: #cfcfcf; width: 24px; height: 24px;
+  margin-left: auto; margin-right: auto; border-radius: 0; overflow: hidden;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1); transition: background 0.35s;
+}
+.rss img { width: 80%; height: 80%; object-fit: contain; padding-top: 2px; transition: opacity 0.35s ease; }
+.rss:hover       { background-color: #3f4549; }
+
+/* ==========================================================================
+  8) Post cards (blog/microblog list items)
+  ========================================================================= */
+
+.post {
+  background-color: #2b2b2b; color: #cfcfcf; padding: 20px 20px 10px; margin-bottom: 10px;
+  border-radius: 0; box-shadow: 0 0 5px rgba(0,0,0,0.1); transition: background 0.35s;
+}
+.post:hover       { background-color: #5580ab4f; }
+.post h3 { margin: 0 0 10px; }
+.post p  { margin: 0; }
+#date { font-size: small; color: #5b5b5b; text-align: right; padding-bottom: 10px; transition: color 0.35s; }
+
+/* ==========================================================================
+  9) Code blocks / inline code
+  ========================================================================= */
+
+code { font-family: "MonospaceFont"; border-radius: 3px; background-color: #111111; color: #56a355; }
+
+/* ==========================================================================
+  10) Tooltip / speech bubble
+  ========================================================================= */
+
+.speech-bubble { position: absolute; top: 24px; right: 0; padding: 10px; border-radius: 0; color: black; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.35s ease, visibility 0.35s ease; z-index: 2; }
+.show-tooltip { opacity: 1; visibility: visible; cursor: pointer; pointer-events: auto; }
+
+/* ==========================================================================
+  11) Avatar image
+  ========================================================================= */
+
+#avatar { width: 300px; height: 300px; border: 3px solid #515151; background-image: url('/resources/cover.png'); background-size: cover; background-position: center; background-repeat: no-repeat; pointer-events: none; -webkit-user-drag: none; user-select: none; transition: color 0.35s; }
+
+/* ==========================================================================
+  12) Guestbook
+  ========================================================================= */
+
+.guestbook { position: relative; width: 300px; height: 300px; border: 2px solid #515151; transition: color 0.35s; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+.guestbook-messages { display: flex; flex-direction: column-reverse; width: 100%; overflow-y: auto; background-color: #101010; color: #cfcfcf; padding: 6px; box-sizing: border-box; font-size: 12px; text-align: left; flex: 1 1 auto; min-height: 0; }
+.guestbook-message { margin-bottom: 3px; font-family: "MainRegular", monospace;}
+.guestbook-controls { display: flex; border-top: 2px solid #515151; box-sizing: border-box; background-color: #181818; }
+
+/* Scrollbar */
+.guestbook-messages { scrollbar-width: thin; scrollbar-color: #5c5c5c #101010; }
+.guestbook-messages::-webkit-scrollbar { width: 4px; height: 4px; }
+.guestbook-messages::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0); border-radius: 4px; }
+.guestbook-messages::-webkit-scrollbar-thumb { background: #5c5c5c; border-radius: 4px; }
+.guestbook-messages::-webkit-scrollbar-thumb:hover { background: #303030; }
+.guestbook-messages::-webkit-scrollbar-corner { background: transparent; }
+
+.start-message { color: #4e4e4e; text-align: center; padding-bottom: 24px;}
+.system-message { font-family: "MainItalic", monospace; color: #4e4e4e; }
+#guestbook-type { flex: 1; border: none; padding: 4px; font-family: "MainRegular", monospace; font-size: 12px; background-color: inherit; color: inherit; }
+#guestbook-type:focus { outline: none; }
+#guestbook-send { border: none; background-color: #5580ab; color: #ffffff; padding: 1px 6px; font-family: "MainBold", monospace; cursor: pointer; transition: background-color 0.35s; }
+.guestbook-controls { position: relative; }
+#guestbook-help { position: absolute; top: 6px; right: 6px; z-index: 10; cursor: pointer; border: none; background-color: transparent; color: #cfcfcf80; font-size: 14px; transition: color 0.35s; text-align: center; text-decoration: none; }
+#gb-time { color: #797878; }
+.gb-trash { background: none; border: none; color: #cfcfcf80; cursor: pointer; font-size: 12px; transition: color 0.35s; }
+
+.gb-name-1 { color: #ab5555; }
+.gb-name-2 { color: #ab7c55; }
+.gb-name-3 { color: #abaa55; }
+.gb-name-4 { color: #63ab55; }
+.gb-name-5 { color: #55aba7; }
+.gb-name-6 { color: #5570ab; }
+.gb-name-7 { color: #7655ab; }
+.gb-name-8 { color: #ab5598; }
+
+.gb-name-admin { color: #a8a8a8; animation: gb-admin 1.6s infinite; }
+
+/* action (/me) messages */
+.guestbook-me { font-style: italic; color: #979797; }
+.guestbook-cmd { font-style: italic; color: #979797; }
+.gb-sound-toggle { position: absolute; top: 4px; right: 18px; z-index: 10; cursor: pointer; border: none; background-color: transparent; color: #cfcfcf80; font-size: 14px; transition: color 0.35s; text-align: center; text-decoration: none; }
+
+#subtext { font-size: small; color: #565656; margin-top: 4px; }
+
+@keyframes gb-admin{0%{text-shadow:0.4389924193300864px 0 1px rgba(0,30,255,0.5),-0.4389924193300864px 0 1px rgba(255,0,80,0.3),0 0 3px;}5%{text-shadow:2.7928974010788217px 0 1px rgba(0,30,255,0.5),-2.7928974010788217px 0 1px rgba(255,0,80,0.3),0 0 3px;}10%{text-shadow:0.02956275843481219px 0 1px rgba(0,30,255,0.5),-0.02956275843481219px 0 1px rgba(255,0,80,0.3),0 0 3px;}15%{text-shadow:0.40218538552878136px 0 1px rgba(0,30,255,0.5),-0.40218538552878136px 0 1px rgba(255,0,80,0.3),0 0 3px;}20%{text-shadow:3.4794037899852017px 0 1px rgba(0,30,255,0.5),-3.4794037899852017px 0 1px rgba(255,0,80,0.3),0 0 3px;}25%{text-shadow:1.6125630401149584px 0 1px rgba(0,30,255,0.5),-1.6125630401149584px 0 1px rgba(255,0,80,0.3),0 0 3px;}30%{text-shadow:0.7015590085143956px 0 1px rgba(0,30,255,0.5),-0.7015590085143956px 0 1px rgba(255,0,80,0.3),0 0 3px;}35%{text-shadow:3.896914047650351px 0 1px rgba(0,30,255,0.5),-3.896914047650351px 0 1px rgba(255,0,80,0.3),0 0 3px;}40%{text-shadow:3.870905614848819px 0 1px rgba(0,30,255,0.5),-3.870905614848819px 0 1px rgba(255,0,80,0.3),0 0 3px;}45%{text-shadow:2.231056963361899px 0 1px rgba(0,30,255,0.5),-2.231056963361899px 0 1px rgba(255,0,80,0.3),0 0 3px;}50%{text-shadow:0.08084290417898504px 0 1px rgba(0,30,255,0.5),-0.08084290417898504px 0 1px rgba(255,0,80,0.3),0 0 3px;}55%{text-shadow:2.3758461067427543px 0 1px rgba(0,30,255,0.5),-2.3758461067427543px 0 1px rgba(255,0,80,0.3),0 0 3px;}60%{text-shadow:2.202193051050636px 0 1px rgba(0,30,255,0.5),-2.202193051050636px 0 1px rgba(255,0,80,0.3),0 0 3px;}65%{text-shadow:2.8638780614874975px 0 1px rgba(0,30,255,0.5),-2.8638780614874975px 0 1px rgba(255,0,80,0.3),0 0 3px;}70%{text-shadow:0.48874025155497314px 0 1px rgba(0,30,255,0.5),-0.48874025155497314px 0 1px rgba(255,0,80,0.3),0 0 3px;}75%{text-shadow:1.8948491305757957px 0 1px rgba(0,30,255,0.5),-1.8948491305757957px 0 1px rgba(255,0,80,0.3),0 0 3px;}80%{text-shadow:0.0833037308038857px 0 1px rgba(0,30,255,0.5),-0.0833037308038857px 0 1px rgba(255,0,80,0.3),0 0 3px;}85%{text-shadow:0.09769827255241735px 0 1px rgba(0,30,255,0.5),-0.09769827255241735px 0 1px rgba(255,0,80,0.3),0 0 3px;}90%{text-shadow:3.443339761481782px 0 1px rgba(0,30,255,0.5),-3.443339761481782px 0 1px rgba(255,0,80,0.3),0 0 3px;}95%{text-shadow:2.1841838852799786px 0 1px rgba(0,30,255,0.5),-2.1841838852799786px 0 1px rgba(255,0,80,0.3),0 0 3px;}100%{text-shadow:2.6208764473832513px 0 1px rgba(0,30,255,0.5),-2.6208764473832513px 0 1px rgba(255,0,80,0.3),0 0 3px;}}@keyframes flicker{0%{opacity:0.27861;}5%{opacity:0.34769;}10%{opacity:0.23604;}15%{opacity:0.90626;}20%{opacity:0.18128;}25%{opacity:0.83891;}30%{opacity:0.65583;}35%{opacity:0.67807;}40%{opacity:0.26559;}45%{opacity:0.84693;}50%{opacity:0.96019;}55%{opacity:0.08594;}60%{opacity:0.20313;}65%{opacity:0.71988;}70%{opacity:0.53455;}75%{opacity:0.37288;}80%{opacity:0.71428;}85%{opacity:0.70419;}90%{opacity:0.7003;}95%{opacity:0.36108;}100%{opacity:0.24387;}}
+
+/* ==========================================================================
+  13) Tabs
+  ========================================================================= */
+
+.tab { display: flex; justify-content: center; overflow: hidden; background-color: #101010; border-bottom: 2px solid #5a5a5a; border-top-left-radius: 5px; border-top-right-radius: 5px; font-family: "MainRegular", monospace; }
+.tab button { background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; font-size: 17px; color: #c2c2c2; font-family: "MainRegular", monospace; flex: 1; text-align: center; }
+.tab button:hover           { background-color: #333; }
+.tab button.active          { background-color: #292929; color: #fff; }
+.tabcontent { display: none; padding: 6px 12px; border-top: none; color: #c2c2c2; background-color: #131313; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; transition: background-color 0.35s ease; }
+
+/* ==========================================================================
+  14) Grid gallery
+  ========================================================================= */
+
+.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; background-color: #131313; border-radius: 0; transition: background-color 0.35s ease; }
+.grid-item { text-align: center; font-size: small; }
+.grid-item img { width: 100%; height: auto; border-radius: 0; outline: 0 solid #2f2f2f; transition: outline-width 0.1s ease-out; }
+.grid-item img:hover { outline: 4px solid #2f2f2f; }
+.grid-item p { margin: 10px 0 3px; color: #c2c2c2; }
+#subp { font-size: x-small; color: #565656; margin: 0; }
+
+/* ==========================================================================
+  15) Audio player
+  ========================================================================= */
+
+.audio-player { display: flex; align-items: center; gap: 10px; margin: 20px auto 0; width: 300px; font-size: small; }
+.audio-player button { background: none; border: none; cursor: pointer; width: 20px; height: 20px; display: flex; justify-content: center; align-items: center; padding: 0; margin: 0; font-size: 20px; color: #c2c2c2; transition: color 0.3s, transform 0.3s; }
+.audio-player button:hover { color: #5578a3; }
+.audio-player input[type="range"] { width: 100%; }
+.audio-player input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #c2c2c2; }
+.audio-player span { font-size: small; }
+
+/* ==========================================================================
+  16) Icon row + labels
+  ========================================================================= */
+
+#iconlist { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+#iconlist img { width: 40px; height: 40px; border-radius: 15%; }
+#downloadtext, #songname { display: flex; font-size: small; align-items: center; justify-content: center; }
+
+/* ==========================================================================
+  17) Contact form
+  ========================================================================= */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 12px;
+  width: 100%;
+  max-width: 560px;
+  color: #cfcfcf;
+  border-radius: 0;
+  font-family: "MainRegular", monospace;
+  transition: background-color 0.35s, color 0.35s;
+}
+
+.contact-form input,
+.contact-form textarea {
+  font-family: "MainRegular", monospace;
+  font-size: 0.8rem;
+  background-color: #303030;
+  color: #cfcfcf;
+  border: 2px solid #3d3d3d;
+  padding: 6px;
+  border-radius: 0;
+  margin-left: 52px;
+  margin-right: 52px;
+  transition: background-color 0.35s, color 0.35s, border-color 0.35s;
+}
+
+.contact-form button {
+  background-color: #5580ab;
+  color: #ffffff;
+  border: none;
+  padding: 6px;
+  border-radius: 0;
+  margin-left: 52px;
+  margin-right: 52px;
+  font-family: "MainBold", monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.35s;
+}
+.contact-form button:hover { background-color: #9576a7; }
+
+@media (max-width: 600px) {
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* ==========================================================================
+  18) Confetti (falling glyphs effect)
+  ========================================================================= */
+
+.confetti { position: fixed; top: 0; font-size: 8px; color: rgb(231, 231, 231); user-select: none; pointer-events: none; animation-name: fall; animation-timing-function: linear; animation-duration: 5s; animation-iteration-count: 1; }
+
+/* ==========================================================================
+  19) Microblog post card + pagination
+  ========================================================================= */
+
+.microblog-post { background-color: #262626; color: #ddd; padding: 16px 16px 6px 12px; margin-bottom: 12px; transition: filter 0.15s; }
+.microblog-post:hover { filter: brightness(0.90); }
+#microblog-user { font-family: "MainBold", monospace; }
+#microblog-username { font-family: "MainRegular", monospace; color: #878787; margin-left: 6px; }
+#microblog-date { float: right; color: #878787; }
+.pagination { display: flex; justify-content: center; margin-top: 20px; }
+
+/* ==========================================================================
+  20) Keyframes
+  ========================================================================= */
+
+@keyframes fall { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(100vh) rotate(360deg); } }
+@keyframes fade { from { opacity: 1; } to { opacity: 0; } }
+@keyframes movegradient { from { background-position: -250% 0; } to { background-position: 100% 0; } }
+
