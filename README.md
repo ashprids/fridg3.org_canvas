@@ -1,3 +1,9 @@
+This is a clone of the ashprids/fridg3.org repository before the major redesign in January 2026. This repository doesn't include any information not pushed to the original repository (e.g. images, microblog/guestbook posts, etc.)
+
+If you'd like a copy of the website including everything, you can download it here: [Google Drive](https://drive.google.com/file/d/1PH_2GFU7ibgqXOXTC-GzT_u2CeyfK-Ui/view?usp=sharing)
+
+Some data has been removed from the above Google Drive mirror (i.e. guestbook IP logs, Discord webhook tokens) for security reasons.
+
 [![deploy to fridg3.org](https://github.com/ashprids/fridg3.org/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/ashprids/fridg3.org/actions/workflows/deploy.yml)
 
 # fridg3.org
