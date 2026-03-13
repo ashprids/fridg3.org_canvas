@@ -579,7 +579,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }).catch(err => {
                 console.warn('set_name failed', err);
-                displaySystemMessage('Failed to reserve username (network error)');
+                displaySystemMessage('If the guestbook was still functional, your message would have sent!'); // in the real thing, this would say 'Failed to reserve username (network error)'
             }).finally(() => { input.value = ''; });
             return;
         }

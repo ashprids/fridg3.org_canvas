@@ -1,0 +1,60 @@
+<!-- 
+rename this file to template.html and replace placeholders with PHP variables to return PHP functionality
+you may run into issues if you're running this on a local PHP server, not entirely sure why!
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/resources/favicon.png"> 
+    <title>fridge | microblog</title>
+    <meta name="description" content="Shortform blog posts and thoughts throughout the day.">
+</head>
+
+<body>
+<div class="container">
+<script src="/theme.js"></script>
+<button id="change-theme"><i class="fa-solid fa-palette"></i></button>
+    <center>
+    <h1><a href="https://fridg3.org">fridge</a></h1>
+    <span id="current">[micro]</span><a href="/blog">blog</a>
+    <a href="/about">about</a>
+    <a href="/contact">contact</a>
+    <a href="/projects">projects</a>
+    <a href="/music">music</a>
+    </center>
+<br>
+<h3>microblog</h3>
+<h4>short snippets and updates</h4>
+<div class='contact-form' style='display:flex;align-items:center;gap:0;flex-direction:row;padding:0;margin:0;width:100%;box-sizing:border-box;'>
+<input type="search" name="q" placeholder="search /microblog/ for.." value="" style="font-family: 'MainRegular', monospace; font-size:0.8rem; flex:1; width:85%; min-width:0; box-sizing:border-box; height:32px; line-height:1.1; margin-left:0; margin-right:0;" />
+<button type="submit" onclick="alert('When functional, searching would only display posts that match the filter.')" style="margin-left:0; margin-right:0; padding:6px 10px; border-radius:0; font-family: 'MainBold', monospace; font-size:1rem; cursor:pointer; width:15%; height:32px; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box;">search</button>
+</form></div>
+<div id="posts">
+
+<div class='microblog-post' onclick="alert('When functional, clicking on a post opens it in its own page.')" style='cursor:pointer;'>
+<span id='microblog-user'>fridge</span> <span id='microblog-username'>@fridgestuff</span> <span id='microblog-date'>13/03/26</span><br><br>
+you could also upload images here, but unlike in cyberdeck, you were limited to one image per post and it would always display as the last element.
+<br><br>
+<img id='microblog-image' src='examplepic.png' style='max-width: 100%; border-radius: 0px;'></a>
+<br></div><hr>
+
+<div class='microblog-post' onclick="alert('When functional, clicking on a post opens it in its own page.')" style='cursor:pointer;'>
+<span id='microblog-user'>fridge</span> <span id='microblog-username'>@fridgestuff</span> <span id='microblog-date'>13/03/26</span><br><br>
+how does it work? good question!
+<br><br>
+you'd log into the page at /admin/, and then you'd be able to make a post through there. very functional, but less "automatic" than the cyberdeck version.<br><br></div><hr>
+
+<div class='microblog-post' onclick="alert('When functional, clicking on a post opens it in its own page.')" style='cursor:pointer;'>
+<span id='microblog-user'>fridge</span> <span id='microblog-username'>@fridgestuff</span> <span id='microblog-date'>13/03/26</span><br><br>
+the microblog page isn't functional because this version of the website doesn't support PHP... which sucks! but it's chill, this is only here for preview purposes anyway.<br><br></div><hr>
+
+<br><br>
+<div id="downloadtext">
+total posts: 3
+</div>
+</div>
+</body>
+</html>

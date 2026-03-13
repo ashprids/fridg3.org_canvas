@@ -25,7 +25,27 @@
 <h3>Send an email!</h3>
 <br>
 <center>
-    <form class="contact-form" action="https://formsubmit.co/me@fridg3.org" method="POST">
+    <form class="contact-form" action="" method="POST">
+        <!-- JS message popup -->
+        <div id="popup-message" style="display:none;position:fixed;top:20%;left:50%;transform:translate(-50%,0);background:#222;color:#fff;padding:20px;border-radius:8px;z-index:1000;">
+            <span id="popup-text"></span>
+            <button onclick="document.getElementById('popup-message').style.display='none';" style="margin-left:10px;">Close</button>
+        </div>
+        <script>
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            const user = document.getElementById('captcha-input').value.trim();
+            const answer = document.getElementById('captcha-answer').value;
+            if (user === answer) {
+                e.preventDefault();
+                document.getElementById('popup-text').textContent = "This contact form no longer accepts submissions. If you want to contact me, email me@fridg3.org.";
+                document.getElementById('popup-message').style.display = "block";
+                setTimeout(() => {
+                    document.getElementById('popup-message').style.display = "none";
+                    this.submit();
+                }, 10000);
+            }
+        });
+        </script>
         <input type="hidden" name="_subject" value="from /contact/">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
